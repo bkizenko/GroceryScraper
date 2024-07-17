@@ -1,0 +1,19 @@
+{
+  "name": "groceryscraper",
+  "version": "1.0.0",
+  "description": "You can enter your address and grocery list and app will tell you where to get everything the cheapest and how long it will take",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "firebase": "firebase"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^10.12.3"
+  },
+  "devDependencies": {
+    "firebase-tools": "latest"
+  }
+}
