@@ -3,6 +3,7 @@
 import { getRestaurants } from "@/lib/firebase/firestore.js";
 import { signInWithGoogle, signOut, onAuthStateChanged } from "@/lib/firebase/auth.js";
 import { useState, useEffect } from "react";
+import { fetchWithFirebaseHeaders } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -21,7 +22,7 @@ export default function Home({ searchParams }) {
   }, [searchParams]);
 
   const fetchRestaurants = async () => {
-    const response = await fetch('/api/getAuthenticatedAppForUser');
+    const response = await fetchWithFirebaseHeaders(new Request('/api/getAuthenticatedAppForUser'));
     const { firebaseServerApp } = await response.json();
     const restaurants = await getRestaurants(firebaseServerApp, searchParams);
     setRestaurants(restaurants);

@@ -1,19 +1,27 @@
-export function randomNumberBetween(min = 0, max = 1000) {
-	return Math.floor(Math.random() * (max - min + 1) + min);
+import { initializeApp } from "firebase/app";
+import { getAuth, getIdToken } from "firebase/auth";
+import { getInstallations, getToken } from "firebase/installations";
+import { firebaseConfig } from "./firebase/config";
+
+async function fetchWithFirebaseHeaders(request) {
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const installations = getInstallations(app);
+  const headers = new Headers(request.headers);
+  const [authIdToken, installationToken] = await Promise.all([
+    getAuthIdToken(auth),
+    getToken(installations),
+  ]);
+  headers.append("Firebase-Instance-ID-Token", installationToken);
+  if (authIdToken) headers.append("Authorization", `Bearer ${authIdToken}`);
+  const newRequest = new Request(request, { headers });
+  return await fetch(newRequest);
 }
 
-export function getRandomDateBefore(startingDate = new Date()) {
-	const randomNumberOfDays = randomNumberBetween(20, 80);
-	const randomDate = new Date(
-		startingDate - randomNumberOfDays * 24 * 60 * 60 * 1000
-	);
-	return randomDate;
+async function getAuthIdToken(auth) {
+  await auth.authStateReady();
+  if (!auth.currentUser) return;
+  return await getIdToken(auth.currentUser);
 }
 
-export function getRandomDateAfter(startingDate = new Date()) {
-	const randomNumberOfDays = randomNumberBetween(1, 19);
-	const randomDate = new Date(
-		startingDate.getTime() + randomNumberOfDays * 24 * 60 * 60 * 1000
-	);
-	return randomDate;
-}
+export { fetchWithFirebaseHeaders, getAuthIdToken };
