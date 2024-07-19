@@ -24,4 +24,18 @@ async function getAuthIdToken(auth) {
   return await getIdToken(auth.currentUser);
 }
 
-export { fetchWithFirebaseHeaders, getAuthIdToken };
+// Define the functions here
+export function getRandomDateBefore() {
+    // implementation
+}
+
+export function randomNumberBetween() {
+    // implementation
+}
+
+export function getRandomDateAfter() {
+    // implementation
+}
+
+// Export functions here
+//export { fetchWithFirebaseHeaders, getAuthIdToken, getRandomDateBefore, randomNumberBetween, getRandomDateAfter };

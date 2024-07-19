@@ -2,9 +2,9 @@
 
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/src/components/Header"; // Import the Header component
+import Header from "@/components/Header"; // Corrected import path
 import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "@/src/lib/firebase/auth"; // Import the onAuthStateChanged function
+import { onAuthStateChanged } from "@/lib/firebase/auth"; // Import the onAuthStateChanged function
 
 const inter = Inter({ subsets: ["latin"] });
 

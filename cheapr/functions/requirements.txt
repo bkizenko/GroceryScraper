@@ -1,0 +1,2 @@
+firebase_functions>=0.1.0
+flask>=2.2.0  # Upgrade Flask to a compatible version

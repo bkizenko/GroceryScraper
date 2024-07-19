@@ -16,3 +16,4 @@ Object.keys(config).forEach((key) => {
 });
 
 export const firebaseConfig = config;
+
